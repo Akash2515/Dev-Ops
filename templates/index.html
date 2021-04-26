@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Alerts -->
+{% include 'partials/_alerts.html' %}
+    <style>
+        table {
+          counter-reset: rowNumber;
+        }
+
+        table tr:not(.table_header) {   
+          counter-increment: rowNumber;
+        }
+
+        table tr:not(.table_header) th:first-child::before {
+          content: counter(rowNumber);
+          margin: Auto;
+        }
+        .row {
+        margin-right: 100px !important;
+        margin-left:100px !important;
+        }
+    </style>
+    <h1 align="center">TimeSheet App</h1>
+    <div class="row">
+
+        <h4 align="center">A simple TimeSheets web app to add employee clock in/out information for manager approval</h4>
+
+
+    </div>
+    <div class="row">
+
+        <h5>Description ----------></h5>
+        <ul>
+            <li>Currently, there is one admin user and two regular users</li>
+            <li>New users can register and add their clock in/out information</li>
+            <li>Custom Admin page to manage the application</li>
+            <li>Only admin user can approve the information and view all user information</li>
+            <li>Each user has their own dashboard displaying their clock in/out information along with approval status</li>
+        </ul>
+
+    </div>
+    <div class="row">
+
+
+    </div>
+    <div class="row">
+
+
+    </div>
+{% endblock %}

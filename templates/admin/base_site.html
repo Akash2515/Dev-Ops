@@ -1,0 +1,24 @@
+{% extends 'admin/base.html' %}
+{% load static %}
+
+{% block branding %}
+ <h1 id="head">
+    <a class="navbar-brand" href="{% url 'index' %}"><b>TS</b></a> TimeSheetApp Admin Area
+ </h1>
+{% endblock %}
+
+{% block extrastyle %}
+    <style>
+    #header {
+    height: 50px;
+    background: #10284e;
+    color: #ffff;
+    }
+    #branding h1 {
+    color: #ffff;
+    }
+    #branding h1 a:link, #branding h1 a:visited {
+    color: #ffff;
+    }
+    </style>
+{% endblock %}

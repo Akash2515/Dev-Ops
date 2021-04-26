@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <style>
+        table {
+          counter-reset: rowNumber;
+        }
+
+        table tr:not(.table_header) {
+          counter-increment: rowNumber;
+        }
+
+        table tr:not(.table_header) th:first-child::before {
+          content: counter(rowNumber);
+          margin: Auto;
+        }
+        .row {
+        margin-right: 75px !important;
+        margin-left:75px !important;
+        }
+    </style>
+    <h1 align="center">TimeSheet</h1>
+    <div class="row">
+
+        <table class="table">
+          <thead class="thead-dark">
+            <tr class="table_header">
+              <th scope="col">#</th>
+              <th scope="col">EMP_ID</th>
+              <th scope="col">NAME</th>
+              <th scope="col">PROJECT</th>
+              <th scope="col">IN</th>
+              <th scope="col">OUT</th>
+              <th scope="col">DURATION</th>
+              <th scope="col">APPROVED</th>
+            </tr>
+          </thead>
+            {% load test %}
+            {% for emp in employee %}
+              <tbody>
+                <tr>
+                  <th></th>
+                  <td>{{ emp.emp_id }}</td>
+                  <td>{{ emp.emp_name }}</td>
+                  <td>projectname</td>
+                  <td>{{ emp.date_time_in }}</td>
+                  <td>{{ emp.date_time_out }}</td>
+                  <td>{{ emp.duration }}</td>
+                  
+                  <td>{{ emp.is_approved }}</td>
+                </tr>
+              </tbody>
+            {% endfor %}
+        </table>
+
+    </div>
+{% endblock %}
