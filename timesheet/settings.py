@@ -73,14 +73,14 @@ WSGI_APPLICATION = 'timesheet.wsgi.application'
 
 # Database
 
-
+#integrated the AWS RDS with this django application
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'timesheet',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'timesheetmanagement',
         'USER': 'postgres',
-        'PASSWORD': 'insane',
-        'HOST': 'localhost',
+        'PASSWORD': 'Postgre255',
+        'HOST': 'timesheetmanagement.c5oh2h741xii.us-east-1.rds.amazonaws.com',
         'port': '5432'
     }
 }
