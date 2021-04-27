@@ -62,8 +62,7 @@ def register(request):
         messages.error(request, 'Passwords do not match')
         return redirect('register')
 
-    else:
-        return render(request, 'roles/register.html')
+    return render(request, 'roles/register.html')
 
 #this function helps to login the user
 def login(request):
@@ -78,8 +77,7 @@ def login(request):
         messages.error(request, 'Invalid Credentials')
         return redirect('login')
 
-    else:
-        return render(request, 'roles/login.html')
+    return render(request, 'roles/login.html')
 
 #this method will do the logout operation
 def logout(request):
