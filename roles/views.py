@@ -6,6 +6,9 @@ from django.http import JsonResponse
 from django.db import connection
 import json as JSON
 from django.db import transaction
+from django.core.mail import EmailMessage
+from django.conf import settings
+
 
 def userdashboard(request):
     user_time_entries = Employee.objects.order_by('-date_time_out').filter(emp_id=request.user.id).all
@@ -91,11 +94,36 @@ def approvalprocessing(request):
     body = JSON.loads(request.body)
     print(body)
     if(body["status"]== "True" or body["status"]== "False" ):
-        employee_safe=Employee.objects.get(Id=body['Id'])
-        employee_safe.is_approved = body['status']
-        employee_safe.save()
+        # employee_safe=Employee.objects.get(Id=body['Id'])
+        # employee_safe.is_approved = body['status']
+        # employee_safe.save()
         for i in User.objects.all().filter(id=body['emp_id']):
             print(i.email)
+            print(i.username)
+            if body["status"]== "True":
+                # send_mail(
+                #     'Time Sheet info',
+                #     'Hello'+' '+i.username+'.The Manager has approved your Time Sheet.',
+                #     'timesheetx20122101@gmail.com',
+                #     [i.email],
+                #     fail_silently=False,
+                #     )
+                email=EmailMessage(
+                    'Time Sheet info',
+                    'Hello'+' '+i.username+'.The Manager has approved your Time Sheet.',
+                    from_email=settings.EMAIL_HOST_USER,
+                    to=[i.email],
+                    )
+                email.send()
+
+            else:
+                email=EmailMessage(
+                    'Time Sheet info',
+                    'Hello'+' '+i.username+'.The Manager has approved your Time Sheet.',
+                    from_email=settings.EMAIL_HOST_USER,
+                    to=[i.email],
+                    )
+                email.send()
         return JsonResponse({'status':'success'})
 
 

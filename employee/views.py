@@ -9,8 +9,6 @@ def index(request):
 
 
 def employees(request):
-    # employee = Employee.objects.all()
-    # return render(request, 'employee.html', {'employee': employee})
     if request.method == 'POST' :
         emp_id = request.POST['emp_id']
         emp_name = request.POST['emp_name']
