@@ -2,12 +2,14 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Employee
-#This method will retur the home page
+
 def index(request):
+    """This method will retur the home page """
     return render(request, 'index.html')
 
-#this methoda helps to uodate the details in the employee
+
 def employees(request):
+    """this method will do the updateing the employer db"""
     if request.method == 'POST' :
         emp_id = request.POST['emp_id']
         emp_name = request.POST['emp_name']
@@ -27,4 +29,5 @@ def employees(request):
         return redirect('/roles/userdashboard')
 
 def testcallback():
+    """ this method will return success """
     return 'success'

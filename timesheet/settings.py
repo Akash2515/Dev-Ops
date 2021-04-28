@@ -122,11 +122,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'timesheet/static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
-]
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'timesheet/static'),
+#     os.path.join(BASE_DIR, 'static')
+# ]
 # messaging
 MESSAGE_TAGS = {
     messages.ERROR: 'danger',

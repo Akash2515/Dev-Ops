@@ -9,8 +9,8 @@ from django.http import JsonResponse
 from django.core.mail import EmailMessage
 from django.conf import settings
 
-#this method will be connect to the userdashboard.html
 def userdashboard(request):
+    """this method will be connect to the userdashboard.html"""
     user_entries=Employee.objects.order_by('-date_time_out').filter(emp_id=request.user.id).all()
     user_project = Project.objects.order_by('ProjectId')
     employeedata = Employee.objects.filter(is_approved=False).all()
@@ -21,8 +21,8 @@ def userdashboard(request):
     }
     return render(request, 'roles/userdashboard.html', context)
 
-#the user can register if he dont have a account
 def register(request):
+    """the user can register if he dont have a account"""
     if request.method == 'POST':
         # Get form values
         first_name = request.POST['first_name']
@@ -64,8 +64,8 @@ def register(request):
 
     return render(request, 'roles/register.html')
 
-#this function helps to login the user
 def login(request):
+    """ this function helps to login the user """
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -79,15 +79,15 @@ def login(request):
 
     return render(request, 'roles/login.html')
 
-#this method will do the logout operation
 def logout(request):
+    """ this method will do the logout operation """
     if request.method == 'POST':
         auth.logout(request)
         messages.success(request, 'You are successfully logged out')
         return redirect('index')
 
-#this method will do the approval and reject operation
 def approvalprocessing(request):
+    """this method will do the approval and reject operation"""
     body = JSON.loads(request.body)
     print(body)
     if(body["status"]== "True" or body["status"]== "False" ):
