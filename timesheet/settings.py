@@ -125,7 +125,7 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'timesheet/static')
+    os.path.join(BASE_DIR, 'static')
 ]
 # messaging
 MESSAGE_TAGS = {
