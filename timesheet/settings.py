@@ -132,7 +132,7 @@ STATIC_URL = '/static/'
 MESSAGE_TAGS = {
     messages.ERROR: 'danger',
 }
-#email settings
+#email setting
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST_USER = 'tmx20122101@gmail.com'
 EMAIL_HOST = 'smtp.gmail.com'
