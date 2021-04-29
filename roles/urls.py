@@ -1,7 +1,6 @@
+"""This urls.py wiil be used for path of the website"""
 from django.urls import path
-
 from . import views
-
 
 urlpatterns = [
     path('login', views.login, name='login'),

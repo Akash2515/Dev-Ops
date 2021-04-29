@@ -3,15 +3,15 @@ import json as JSON
 from django.shortcuts import render, redirect
 from django.contrib import messages, auth
 from django.contrib.auth.models import User
+from django.http import JsonResponse
+from django.conf import settings
 from employee.models import Project
 from employee.models import Employee
-from django.http import JsonResponse
 from django.core.mail import EmailMessage
-from django.conf import settings
 
 def userdashboard(request):
     """this method will be connect to the userdashboard.html"""
-    user_entries=Employee.objects.order_by('-date_time_out').filter(emp_id=request.user.id).all()
+    user_entries = Employee.objects.order_by('-date_time_out').filter(emp_id=request.user.id).all()
     user_project = Project.objects.order_by('ProjectId')
     employeedata = Employee.objects.filter(is_approved=False).all()
     context = {
@@ -29,7 +29,7 @@ def register(request):
         last_name = request.POST['last_name']
         username = request.POST['username']
         user_id = request.POST['employee_id']
-        is_superuser=request.POST['role']
+        is_superuser = request.POST['role']
         email = request.POST['email']
         password = request.POST['password']
         password2 = request.POST['password2']
@@ -47,14 +47,7 @@ def register(request):
             if User.objects.filter(id=user_id).exists():
                 messages.error(request, 'A user with same employee id exists')
                 return redirect('register')
-
-            user = User.objects.create_user(username=username,
-            password=password,
-            email=email,
-            id=user_id,
-            first_name=first_name,
-            is_superuser=is_superuser,
-            last_name=last_name)
+            user = User.objects.create_user(username=username, password=password, email=email, id=user_id, first_name=first_name, is_superuser=is_superuser, last_name=last_name)
             user.save()
             messages.success(request, 'You are now registered and can log in')
             return redirect('login')
@@ -90,16 +83,16 @@ def approvalprocessing(request):
     """this method will do the approval and reject operation"""
     body = JSON.loads(request.body)
     print(body)
-    if(body["status"]== "True" or body["status"]== "False" ):
-        employee_safe=Employee.objects.get(Id=body['Id'])
+    if(body["status"] == "True" or body["status"] == "False"):
+        employee_safe = Employee.objects.get(Id=body['Id'])
         employee_safe.is_approved = body['status']
         employee_safe.save()
         for i in User.objects.all().filter(id=body['emp_id']):
             print(i.email)
             print(i.username)
             #if the manager accept the timesheet a message will be sent to the employee
-            if body["status"]== "True":
-                email=EmailMessage(
+            if body["status"] == "True":
+                email = EmailMessage(
                     'Time Sheet info',
                     'Hello'+' '+i.username+'.The Manager has approved your Time Sheet.',
                     from_email=settings.EMAIL_HOST_USER,
@@ -108,7 +101,7 @@ def approvalprocessing(request):
                 email.send()
             #if the manager reject the timesheet a message will be sent to the employee
             else:
-                email=EmailMessage(
+                email = EmailMessage(
                     'Time Sheet info',
                     'Hello'+' '+i.username+'.The Manager has approved your Time Sheet.',
                     from_email=settings.EMAIL_HOST_USER,

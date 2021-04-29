@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+"""this py file manages the whole django application"""
 import os
 import sys
 
