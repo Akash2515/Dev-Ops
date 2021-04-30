@@ -61,8 +61,8 @@
                 <td     width= 50px>
                   <!-- <input type="submit" value="Approve" class="btn btn-block btn-secondary">
                   <input type="submit" value="Reject" class="btn btn-block btn-secondary"> -->
-                  <button  class="btn-primary btn-block btn-lg actionbutton" data-index = "{{emp.emp_id}}-True-{{emp.date_time_in}}-{{emp.Id}}">Approve</button>
-                  <button class="btn-primary btn-block btn-lg actionbutton" data-index = "{{emp.emp_id}}-False-{{emp.date_time_in}}-{{emp.Id}}">Reject</button> 
+                  <button  class="btn-primary btn-block btn-lg actionbutton" data-index = "{{emp.emp_id}}-True-{{emp.Id}}">Approve</button>
+                  <button class="btn-primary btn-block btn-lg actionbutton" data-index = "{{emp.emp_id}}-False-{{emp.Id}}">Reject</button> 
                 </td>
               </tr>
               {% endfor %}
@@ -207,7 +207,7 @@
   
    [...document.getElementsByClassName("actionbutton")].forEach(elem =>elem.addEventListener('click', function (event){event.preventDefault();dispatchAction(this)}));
  function dispatchAction(element){
-  [emp_id,status,date_time_in,Id]= element.getAttribute('data-index').split('-')
+  [emp_id,status,Id]= element.getAttribute('data-index').split('-')
 
   
   fetch("{% url 'approvalprocessing' %}", {
