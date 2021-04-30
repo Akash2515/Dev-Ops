@@ -7,12 +7,12 @@ phases:
     commands:
       - pip3 install --upgrade pip3
       # Install dependencies needed for running the static analysis
-      - pip install -r requirements.txt pylint
+      - pip3 install -r requirements.txt pylint
       
 
   pre_build:
     commands:
-      - python --version
+      - python3 --version
       - pylint $CODEBUILD_SRC_DIR/*.py --errors-only
       #- pylint $CODEBUILD_SRC_DIR/job-portal/*.py --errors-only
 
