@@ -87,25 +87,23 @@ def approvalprocessing(request):
         employee_safe = Employee.objects.get(Id=body['Id'])
         employee_safe.is_approved = body['status']
         employee_safe.save()
-        for i in User.objects.all().filter(id=body['emp_id']):
-            print(i.email)
-            print(i.username)
-            #if the manager accept the timesheet a message will be sent to the employee
-            if body["status"] == "True":
-                email = EmailMessage(
-                    'Time Sheet info',
-                    'Hello'+' '+i.username+'.The Manager has approved your Time Sheet.',
-                    from_email=settings.EMAIL_HOST_USER,
-                    to=[i.email],
-                    )
-                email.send()
-            #if the manager reject the timesheet a message will be sent to the employee
-            else:
-                email = EmailMessage(
-                    'Time Sheet info',
-                    'Hello'+' '+i.username+'.The Manager has approved your Time Sheet.',
-                    from_email=settings.EMAIL_HOST_USER,
-                    to=[i.email],
-                    )
-                email.send()
+#         for i in User.objects.all().filter(id=body['emp_id']):
+#             #if the manager accept the timesheet a message will be sent to the employee
+#             if body["status"] == "True":
+#                 email = EmailMessage(
+#                     'Time Sheet info',
+#                     'Hello'+' '+i.username+'.The Manager has approved your Time Sheet.',
+#                     from_email=settings.EMAIL_HOST_USER,
+#                     to=[i.email],
+#                     )
+#                 email.send()
+#             #if the manager reject the timesheet a message will be sent to the employee
+#             else:
+#                 email = EmailMessage(
+#                     'Time Sheet info',
+#                     'Hello'+' '+i.username+'.The Manager has approved your Time Sheet.',
+#                     from_email=settings.EMAIL_HOST_USER,
+#                     to=[i.email],
+#                     )
+#                 email.send()
         return JsonResponse({'status':'success'})
