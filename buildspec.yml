@@ -13,7 +13,8 @@ phases:
   pre_build:
     commands:
       - python --version
-      - pylint --disable=R,C0114 $CODEBUILD_SRC_DIR/*.py $CODEBUILD_SRC_DIR/**/*.py
+      - pylint $CODEBUILD_SRC_DIR/*.py --errors-only
+      #- pylint $CODEBUILD_SRC_DIR/job-portal/*.py --errors-only
 
 artifacts:
   files:
